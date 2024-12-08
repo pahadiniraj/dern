@@ -18,7 +18,7 @@ const Layout = () => {
     <>
       <div className="flex h-screen font-poopins">
         <Sidebar />
-        <div className="flex-1 p-4 bg-black overflow-y-auto">
+        <div className="flex-1 p-4 bg-slate-300 overflow-y-auto">
           <ToastContainer />
 
           <Outlet />

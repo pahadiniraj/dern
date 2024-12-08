@@ -90,7 +90,7 @@ const Navbar = () => {
   return (
     <div className=" flex flex-col gap-3">
       {navmenu.map((nav, i) => (
-        <li>
+        <li key={i}>
           <NavLink
             to={nav.path}
             href="#"

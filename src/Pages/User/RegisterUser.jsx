@@ -1,17 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { object } from "yup";
 import { regInitialValue, registerValidation } from "./regSchema";
 import { useFormik } from "formik";
-import http from "../../Utils/http";
 import { ToastContainer, toast } from "react-toastify";
 import Input from "../../Components/Input";
 import Button from "../../Components/Button";
 import { NavLink } from "react-router-dom";
 import Select from "react-select";
+import http from "../../Utils/http";
 
 const RegisterUser = () => {
   const navigation = useNavigate();
+
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: regInitialValue,
@@ -24,13 +26,16 @@ const RegisterUser = () => {
 
   async function registerUser(values) {
     try {
+      setLoading(true);
       const res = await http.post("/auth/register", values);
+      console.log("value of res", res);
       const { accessToken, refreshToken } = res.data;
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       console.log(res);
       navigation("/");
     } catch (error) {
+      setLoading(false);
       console.log(error.response.data.message);
       toast.error(error.response.data.message);
     }
@@ -49,8 +54,8 @@ const RegisterUser = () => {
 
   return (
     <section className="bg-gray-900">
-      <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-        <div className="w-full  rounded-lg shadow border md:mt-0 sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
+      <div className="flex flex-col items-center justify-center px-6  mx-auto md:h-screen lg:py-0">
+        <div className="w-full overflow-y-auto h-full my-4  rounded-lg shadow border  sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign up in to your account
@@ -120,7 +125,7 @@ const RegisterUser = () => {
               <div className="my-5">
                 <label
                   htmlFor="stock_type"
-                  className="block text-sm font-medium text-gray-700"
+                  className="block text-sm font-medium text-gray-300"
                 >
                   Account Type
                 </label>
@@ -151,7 +156,7 @@ const RegisterUser = () => {
                     {formik.errors.userType}
                   </div>
                 ) : null}
-                <div className=" mt-10">
+                <div className=" mt-10 text-white">
                   <span className=" text-red-500">Note: </span> The company
                   provides on-site support for business customers. Individuals
                   must either drop their computer off at one of the company’s
@@ -195,7 +200,7 @@ const RegisterUser = () => {
                 type="submit"
                 className=" mt-5 bg-pink-500 hover:bg-pink-600"
               >
-                Sign Up
+                {loading ? "Loading..." : "Sign Up"}
               </Button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Do You Have a Account{" "}

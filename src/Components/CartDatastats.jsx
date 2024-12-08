@@ -2,17 +2,15 @@ import React from "react";
 
 const CartDatastats = ({ title, total, rate, levelCheck, children }) => {
   return (
-    <div className="rounded-sm border border-solid  bg-white py-6 px-7 shadow-lg dark:border-b-indigo-950 dark:bg-slate-600">
+    <div className="rounded-xl border border-solid   py-6 px-7 shadow-xl border-b-indigo-950 bg-slate-600">
       <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-100 dark:bg-gray-100">
         {children}
       </div>
 
       <div className="mt-4 flex items-end justify-between">
         <div>
-          <h4 className=" text-2xl font-bold text-black dark:text-white">
-            {total}
-          </h4>
-          <span className="text-sm text-gray-500 font-medium">{title}</span>
+          <h4 className=" text-2xl font-bold text-white">{total}</h4>
+          <span className="text-sm text-gray-100 font-medium">{title}</span>
         </div>
 
         <span

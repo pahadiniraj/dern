@@ -13,6 +13,7 @@ import Cookies from "js-cookie";
 const Login = () => {
   const nav = useNavigate();
   const [isTokenExpired, setIsTokenExpired] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -60,6 +61,7 @@ const Login = () => {
 
   const loginuser = async (values) => {
     try {
+      setLoading(true);
       const res = await http.post("/auth/login", values);
       const { accessToken, refreshToken } = res.data;
       localStorage.setItem("accessToken", accessToken);
@@ -69,6 +71,7 @@ const Login = () => {
       console.log(res);
       nav("/dashboard");
     } catch (error) {
+      setLoading(false);
       console.log(error);
       toast.error(error.response.data.message || error.response.data);
     }
@@ -136,7 +139,7 @@ const Login = () => {
                 type="submit"
                 className=" mt-5 bg-pink-500 hover:bg-pink-600"
               >
-                Sign In
+                {loading ? "Loading" : "Sign In"}
               </Button>
               <NavLink
                 to="/forgetpassword"

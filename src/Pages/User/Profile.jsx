@@ -23,7 +23,7 @@ const Profile = () => {
 
   console.log(fetchuserinfo);
   return (
-    <div class="hidden space-y-6 p-10 pb-16 md:block bg-white">
+    <div class="hidden space-y-6 p-10 pb-16 md:block bg-slate-500 text-white rounded-lg">
       <div class="space-y-0.5">
         <h2 class="text-2xl font-bold tracking-tight">Settings</h2>
         <p class="text-muted-foreground"></p>
@@ -36,7 +36,7 @@ const Profile = () => {
           </a>
         </nav>
 
-        <div class="flex-1 flex gap-2 flex-col lg:max-w-2xl">
+        <div class="flex-1 flex gap-2 flex-col lg:max-w-2xl ">
           <h2 class="text-lg font-bold tracking-tight">Account</h2>
           <p class="text-sm text-muted-foreground">
             Name: <strong>{userinfo.name}</strong>
