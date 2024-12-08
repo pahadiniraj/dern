@@ -3,7 +3,7 @@ import Cookies from "js-cookie";
 
 // Create an Axios instance with default configurations
 const http = axios.create({
-  baseURL: "https://dern-phi.vercel.app",
+  baseURL: "https://dern-api.vercel.app",
   withCredentials: true,
 });
 
